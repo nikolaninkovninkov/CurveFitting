@@ -1,0 +1,36 @@
+.curve-fitter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: none;
+}
+.data-input {
+  margin: 0 auto;
+  display: flex;
+}
+.data-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+textarea {
+  resize: none;
+}
+.func-input > input {
+  width: 100%;
+}
+.apply-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
