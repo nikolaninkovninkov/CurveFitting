@@ -54,8 +54,12 @@ def get_params(func):
         if param not in unique_params:
             unique_params.append(param)
     return unique_params
+import math
+import re
+
+    
 def fit_curve(xdata, ydata, func, to_print=False):
-    clean_func = utils.clean_function(func)
+    clean_func = utils.clean_input_function(func)
     params = ['x', *get_params(clean_func)]
     f = return_f(clean_func, params)
     new_initial_values = [1 for _ in params[1:]]

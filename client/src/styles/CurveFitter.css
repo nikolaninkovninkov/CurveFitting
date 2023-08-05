@@ -34,3 +34,20 @@ textarea {
   align-items: center;
   justify-content: center;
 }
+.table-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.table-container > table {
+  width: 500px;
+}
+th {
+  text-align: left;
+}
+#graph {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
