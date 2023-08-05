@@ -10,17 +10,12 @@ axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL;
 export default function CurveFitter() {
   const [xvalue, setXvalue] = useLocalStorage('xvalue', '');
   const [yvalue, setYvalue] = useLocalStorage('yvalue', '');
-  const [functionValue, setFunctionValue] = useLocalStorage(
-    'functionValue',
-    '',
-  );
-  const [responseData, setResponseData] = useLocalStorage(
-    'responseData',
-    {} as CurveFitResponseData,
-  );
+  const [functionValue, setFunctionValue] = useLocalStorage('functionValue', '');
+  const [responseData, setResponseData] = useLocalStorage('responseData', {} as CurveFitResponseData);
   const [tableShow, setTableShow] = useState(false);
   useEffect(() => {
-    console.log(JSON.parse(JSON.stringify(responseData))['a']);
+    if (!Object.keys(responseData).length) return setTableShow(false);
+    setTableShow(true);
     const data = parseData(xvalue, yvalue);
     functionPlot({
       target: '#graph',
@@ -42,10 +37,10 @@ export default function CurveFitter() {
       ],
     });
     const circles = document.querySelectorAll('circle');
+    if (!circles) return;
     for (let i = 0; i < circles.length; i++) {
       circles[i].setAttribute('r', '3');
     }
-    setTableShow(!!Object.keys(responseData));
   }, [responseData, xvalue, yvalue]);
   function handleApply() {
     const data = parseData(xvalue, yvalue);
@@ -63,33 +58,21 @@ export default function CurveFitter() {
       <div id='graph'></div>
       <div className='func-input'>
         <div className='label'>Function input</div>
-        <input
-          type='text'
-          onChange={(e) => setFunctionValue(e.target.value)}
-          value={functionValue}
-        />
+        <input type='text' onChange={(e) => setFunctionValue(e.target.value)} value={functionValue} />
       </div>
       <div className='data-input'>
         <div className='data-col'>
           <div className='label'>X Axis</div>
           <textarea
             rows={10}
-            onChange={(e) =>
-              setXvalue((v) =>
-                /^[0-9.\n]*$/.test(e.target.value) ? e.target.value : v,
-              )
-            }
+            onChange={(e) => setXvalue((v) => (/^[0-9.\n]*$/.test(e.target.value) ? e.target.value : v))}
             value={xvalue}></textarea>
         </div>
         <div className='data-col'>
           <div className='label'>Y Axis</div>
           <textarea
             rows={10}
-            onChange={(e) =>
-              setYvalue((v) =>
-                /^[0-9.\n]*$/.test(e.target.value) ? e.target.value : v,
-              )
-            }
+            onChange={(e) => setYvalue((v) => (/^[0-9.\n]*$/.test(e.target.value) ? e.target.value : v))}
             value={yvalue}></textarea>
         </div>
       </div>
@@ -162,12 +145,7 @@ export default function CurveFitter() {
       {tableShow && (
         <div className='output-func'>
           <p>{responseData.output_function}</p>
-          <button
-            onClick={() =>
-              navigator.clipboard.writeText(responseData.output_function)
-            }>
-            Copy
-          </button>
+          <button onClick={() => navigator.clipboard.writeText(responseData.output_function)}>Copy</button>
         </div>
       )}
     </div>
