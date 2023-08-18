@@ -4,3 +4,4 @@ django-cors-headers==4.2.0
 numpy
 scipy
 sqlparse==0.4.4
+sympy

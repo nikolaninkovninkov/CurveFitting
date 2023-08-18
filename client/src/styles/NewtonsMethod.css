@@ -1,0 +1,24 @@
+.newtons-method {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.func-input > input {
+  width: 100%;
+}
+.apply-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.table-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.table-container > table {
+  width: 500px;
+}
+th {
+  text-align: left;
+}

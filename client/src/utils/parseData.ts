@@ -1,6 +1,9 @@
+import removeWhitespaces from './removeWhitespaces';
+import { parseRow } from './rowParsers';
+
 function parseData(xvalue: string, yvalue: string) {
-  const xrows = xvalue.split('\n');
-  const yrows = yvalue.split('\n');
+  const xrows = removeWhitespaces(xvalue).split('\n');
+  const yrows = removeWhitespaces(yvalue).split('\n');
   const xlen = xrows.length;
   const ylen = yrows.length;
   let data: [number[], number[]] = [[], []];
@@ -15,7 +18,3 @@ function parseData(xvalue: string, yvalue: string) {
   return data;
 }
 export default parseData;
-function parseRow(row: string): number {
-  const number = parseFloat(row);
-  return number;
-}

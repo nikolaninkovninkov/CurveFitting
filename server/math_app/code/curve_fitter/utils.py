@@ -2,8 +2,6 @@ import numpy as np
 import math
 def create_dict_from_lists(list1, list2):
     return {list1[i]: list2[i] for i in range(len(list1))}
-def create_format_of_results(params):
-    return 'fit: ' + ', '.join(f'{param}=%.4E' for param in params[1:])
 def clean_input_function(function):
     cleaned = function.replace(" ", "")
     cleaned = cleaned.replace('+-', '-')
@@ -99,11 +97,11 @@ def format_number(number):
                 return_str += '0'
             return_str += '1'
         return return_str
-    if 'e' not in f'{number}':
-        return f'{number}'
-    a, b = f'{number}'.split('e')
+    if 'e' not in str(number):
+        return str(number)
+    a, b = str(number).split('e')
     a = float(a)
     b = int(b)
     if b == 0:
-        return f'{a}'
-    return f'{a}*{gen_10_multiplier(b)}'
+        return str(a)
+    return str(a)+'*'+str(gen_10_multiplier(b))
