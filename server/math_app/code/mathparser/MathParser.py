@@ -19,9 +19,7 @@ data = {
     "erf":math.erf,
     "exp":np.exp,
     "fact":math.factorial,
-    "ln":np.log,
-    "log": lambda x, base: np.log(x)/np.log(base),
-    "log10":np.log10,
+    "log":np.log,
     "mod":lambda a, b: np.mod(a, b),
     "pi":np.pi,
     "pow":lambda x, power: np.pow(x, power),
@@ -127,4 +125,4 @@ def get_params(func):
             unique_params.append(param)
     return unique_params
 def get_data():
-    return data
+    return data.copy()

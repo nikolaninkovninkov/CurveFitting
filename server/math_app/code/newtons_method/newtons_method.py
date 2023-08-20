@@ -1,9 +1,10 @@
 import random
-from sympy import sympify, diff
+from .utils import clean_input_function
+from sympy import parse_expr, diff
 EPSILON = 1e-15
 def get_root(func, start_value=random.random()):
-    f = sympify(func)
-    x = sympify('x')
+    f = parse_expr(clean_input_function(func))
+    x = parse_expr('x')
     df_dx = diff(f, x)
     iterations = 0
     current_x = start_value

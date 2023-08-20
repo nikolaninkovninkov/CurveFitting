@@ -7,12 +7,21 @@ import CurveFitResponseData from '../types/CurveFitResponseData';
 import functionPlot from 'function-plot';
 import splitArrays from '../utils/splitArrays';
 import inputDataValueParser from '../utils/inputDataValueParser';
-import { applyAxisTransform, applyFunctionalTransform } from '../utils/applyTransform';
+import {
+  applyAxisTransform,
+  applyFunctionalTransform,
+} from '../utils/applyTransform';
 export default function CurveFitter() {
   const [xvalue, setXvalue] = useLocalStorage('curvefitter.xvalue', '');
   const [yvalue, setYvalue] = useLocalStorage('curvefitter.yvalue', '');
-  const [functionValue, setFunctionValue] = useLocalStorage('curvefitter.functionValue', '');
-  const [responseData, setResponseData] = useLocalStorage('curvefitter.responseData', {} as CurveFitResponseData);
+  const [functionValue, setFunctionValue] = useLocalStorage(
+    'curvefitter.functionValue',
+    '',
+  );
+  const [responseData, setResponseData] = useLocalStorage(
+    'curvefitter.responseData',
+    {} as CurveFitResponseData,
+  );
   const [tableShow, setTableShow] = useState(false);
   useEffect(() => {
     if (!Object.keys(responseData).length) return setTableShow(false);
@@ -60,50 +69,122 @@ export default function CurveFitter() {
       <div id='graph'></div>
       <div className='func-input'>
         <div className='label'>Function input</div>
-        <input type='text' onChange={(e) => setFunctionValue(e.target.value)} value={functionValue} />
+        <input
+          type='text'
+          onChange={(e) => setFunctionValue(e.target.value)}
+          value={functionValue}
+        />
       </div>
       <div className='data-input'>
         <div className='transform-buttons'>
-          <button onClick={() => setXvalue(applyFunctionalTransform(xvalue, 'reciprocal'))}>Reciprocal</button>
-          <button onClick={() => setXvalue(applyFunctionalTransform(xvalue, 'log'))}>Log</button>
-          <button onClick={() => setXvalue(applyFunctionalTransform(xvalue, 'log10'))}>Log10</button>
-          <button onClick={() => setXvalue(applyFunctionalTransform(xvalue, 'exp'))}>
+          <button
+            onClick={() =>
+              setXvalue(applyFunctionalTransform(xvalue, 'reciprocal'))
+            }>
+            Reciprocal
+          </button>
+          <button
+            onClick={() => setXvalue(applyFunctionalTransform(xvalue, 'log'))}>
+            Log
+          </button>
+          <button
+            onClick={() =>
+              setXvalue(applyFunctionalTransform(xvalue, 'log10'))
+            }>
+            Log10
+          </button>
+          <button
+            onClick={() => setXvalue(applyFunctionalTransform(xvalue, 'exp'))}>
             e<sup>x</sup>
           </button>
-          <button onClick={() => setXvalue(applyFunctionalTransform(xvalue, 'square'))}>
+          <button
+            onClick={() =>
+              setXvalue(applyFunctionalTransform(xvalue, 'square'))
+            }>
             x<sup>2</sup>
           </button>
-          <button onClick={() => setXvalue(applyFunctionalTransform(xvalue, 'sqrt'))}>sqrt</button>
-          <button onClick={() => setXvalue(applyAxisTransform(xvalue, yvalue, 'times_other_axis'))}>*Y</button>
-          <button onClick={() => setXvalue(applyAxisTransform(xvalue, yvalue, 'divided_by_other_axis'))}>*1/Y</button>
+          <button
+            onClick={() => setXvalue(applyFunctionalTransform(xvalue, 'sqrt'))}>
+            sqrt
+          </button>
+          <button
+            onClick={() =>
+              setXvalue(applyAxisTransform(xvalue, yvalue, 'times_other_axis'))
+            }>
+            *Y
+          </button>
+          <button
+            onClick={() =>
+              setXvalue(
+                applyAxisTransform(xvalue, yvalue, 'divided_by_other_axis'),
+              )
+            }>
+            *1/Y
+          </button>
         </div>
         <div className='data-col'>
           <div className='label'>X Axis</div>
           <textarea
             rows={10}
-            onChange={(e) => setXvalue((v) => inputDataValueParser(v, e.target.value))}
+            onChange={(e) =>
+              setXvalue((v) => inputDataValueParser(v, e.target.value))
+            }
             value={xvalue}></textarea>
         </div>
         <div className='data-col'>
           <div className='label'>Y Axis</div>
           <textarea
             rows={10}
-            onChange={(e) => setYvalue((v) => inputDataValueParser(v, e.target.value))}
+            onChange={(e) =>
+              setYvalue((v) => inputDataValueParser(v, e.target.value))
+            }
             value={yvalue}></textarea>
         </div>
         <div className='transform-buttons'>
-          <button onClick={() => setYvalue(applyFunctionalTransform(yvalue, 'reciprocal'))}>Reciprocal</button>
-          <button onClick={() => setYvalue(applyFunctionalTransform(yvalue, 'log'))}>Log</button>
-          <button onClick={() => setYvalue(applyFunctionalTransform(yvalue, 'log10'))}>Log10</button>
-          <button onClick={() => setYvalue(applyFunctionalTransform(yvalue, 'exp'))}>
+          <button
+            onClick={() =>
+              setYvalue(applyFunctionalTransform(yvalue, 'reciprocal'))
+            }>
+            Reciprocal
+          </button>
+          <button
+            onClick={() => setYvalue(applyFunctionalTransform(yvalue, 'log'))}>
+            Log
+          </button>
+          <button
+            onClick={() =>
+              setYvalue(applyFunctionalTransform(yvalue, 'log10'))
+            }>
+            Log10
+          </button>
+          <button
+            onClick={() => setYvalue(applyFunctionalTransform(yvalue, 'exp'))}>
             e<sup>x</sup>
           </button>
-          <button onClick={() => setYvalue(applyFunctionalTransform(yvalue, 'square'))}>
+          <button
+            onClick={() =>
+              setYvalue(applyFunctionalTransform(yvalue, 'square'))
+            }>
             x<sup>2</sup>
           </button>
-          <button onClick={() => setYvalue(applyFunctionalTransform(yvalue, 'sqrt'))}>sqrt</button>
-          <button onClick={() => setYvalue(applyAxisTransform(yvalue, xvalue, 'times_other_axis'))}>*X</button>
-          <button onClick={() => setYvalue(applyAxisTransform(yvalue, xvalue, 'divided_by_other_axis'))}>*1/X</button>
+          <button
+            onClick={() => setYvalue(applyFunctionalTransform(yvalue, 'sqrt'))}>
+            sqrt
+          </button>
+          <button
+            onClick={() =>
+              setYvalue(applyAxisTransform(yvalue, xvalue, 'times_other_axis'))
+            }>
+            *X
+          </button>
+          <button
+            onClick={() =>
+              setYvalue(
+                applyAxisTransform(yvalue, xvalue, 'divided_by_other_axis'),
+              )
+            }>
+            *1/X
+          </button>
         </div>
       </div>
       <div className='apply-button'>
@@ -175,7 +256,12 @@ export default function CurveFitter() {
       {tableShow && (
         <div className='output-func'>
           <p>{responseData.output_function}</p>
-          <button onClick={() => navigator.clipboard.writeText(responseData.output_function)}>Copy</button>
+          <button
+            onClick={() =>
+              navigator.clipboard.writeText(responseData.output_function)
+            }>
+            Copy
+          </button>
         </div>
       )}
     </div>

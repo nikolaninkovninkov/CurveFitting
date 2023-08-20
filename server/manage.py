@@ -8,6 +8,14 @@ def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'chemcalc_server.settings')
     try:
+        with open('env.txt') as f:
+            lines = f.readlines()
+            for line in lines:
+                key, value = line.split('=', 1)
+                os.environ[key] = value
+    except FileNotFoundError:
+        pass
+    try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
         raise ImportError(
